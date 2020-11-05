@@ -1,26 +1,53 @@
-<?php
-		$connection = new mysqli("127.0.0.1", "mysql", "mysql", "person's data");
-			$name = mysqli_real_escape_string($connection, $_POST['name']);
-			$lastname = mysqli_real_escape_string($connection, $_POST['lastName']);
-			$email = mysqli_real_escape_string($connection, $_POST['email']);
-			//$indexFile = file_get_contents("index.php");
-			$error = "none";
-
-			if ($connection == false){
-				echo "Error";
-				exit();
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+	<div id="table">
+		<table>
+			<tr><td>9th grade</td></tr>
+			<tr><td>Subjects list</td></tr>
+			<?
+				$con = mysqli_connect("127.0.0.1", "mysql", "mysql", "journal");
+					if ($con == false){
+						echo "error";
+						exit();
+					}
+				$sql = "SELECT * FROM `subjects`";
+				$res = mysqli_query($con, $sql);
+				while ($subject = mysqli_fetch_array($res)){
+				echo "<tr class='sub' id='".$subject['subID']."'><td><a href='marks.php'>".$subject['subject']."</a></td></tr>";
 			}
-			$sql = "SELECT id FROM people where email = '$email'";
-			$result = mysqli_query($connection, $sql);
-			if (mysqli_num_rows($result) == 0){
-				$sql = "INSERT INTO people(name, lastname, email) VALUES ('$name', '$lastname', '$email')";
-				if (mysqli_query($connection, $sql)) {
-      				echo "";
-				} else {
-      				echo "";
-				}
-			} else {
-				$error = "active";
+			?>
+			<script type="text/javascript">
+				window.onload=function(){
+					let subList = document.querySelectorAll('.sub');
+					console.log(subList);
+					for(let i=0; i < subList.length; i++){
+						subList[i].addEventListener('click', function(){
+							let id = 1234;
+							$.ajax({
+								type: 'POST',
+								url: 'marks.php',
+								dataType: 'json',
+								data: {subID: id},
+								success: function(){
+									alert("ok");
+								},
+								error: function() {
+        							alert("not ok");
+        						}
+							})
+						})
+					}
 			}
-			mysqli_close($connection);
-?>
+			</script>
+		</table>
+	</div>
+</body>
+</html>
