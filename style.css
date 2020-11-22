@@ -1,16 +1,71 @@
-td {
-	border: 1px solid black;
-}
 
+#selectBlocks {
+	display: block;
+	width: 100%;
+	height: 50px;
+	padding: 20px;
+}
+.selBlock {
+	display: inline-block;
+	position: fixed;
+	border: 1px solid #1a1f28;
+	border-radius: 6px;
+	height: 20px;
+	width: 120px;
+	font-family: Franklin Gothic Book;
+	color: #1a1f28;
+	font-size: 16px;
+	font-weight: normal;
+	text-align: left;
+	padding: 3px 10px 0 10px;
+	margin-right: 20px;
+	list-style: none;
+	resize: horizontal;
+}
+.bl2 {
+	margin-left: 160px;
+}
+h5 {
+	display: table-cell;
+}
+.square {
+	display: table-cell;
+	width: 8px;
+	height: 8px;
+	border-bottom: 1px solid #1a1f28;
+	border-left: 1px solid #1a1f28;
+	transform: rotate(-45deg);
+	margin: -12px 0 0 0;
+	float: right;
+}
+.hide {
+	display: none;
+	font-family: Franklin Gothic Book;
+	color: #1a1f28;
+	font-size: 16px;
+	font-weight: normal;
+	text-align: left;
+	text-decoration: none;
+}
+.hideActive {
+	display: block;
+	background: #fff;
+	border: 1px solid black;
+	border-radius: 6px;
+	height: 20px;
+	width: 120px;
+	margin: 0 0 0 -10px;
+	padding: 3px 10px 0 10px;
+	z-index: 1;
+}
+.hidden {
+	margin-top: 5px;
+}
 #table {
+	z-index: 0;
 	width: 100%;
+	border: 1px solid #000;
 }
-table {
-	width: 100%;
-}
-.students {
-	width: 150px;
-}
-h1 {
-	color: #000;
+td {
+	border: 1px solid #000;
 }
