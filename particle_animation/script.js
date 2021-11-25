@@ -6,12 +6,12 @@
     h = canvas.height = innerHeight,
     particles = [],
     properties = {
-      bgColor: 'rgba(17, 17, 18, 1)',
-      particleColor: 'rgba(229, 36, 255, 1)',
+      bgColor: 'rgba(28, 28, 36, 1)',
+      particleColor: 'rgba(227, 0, 0, 1)',
       particleRad: 3,
-      particleCount: 60,
+      particleCount: 90,
       particleMaxVelocity: 0.5,
-      lineLen: 150,
+      lineLen: 250,
       particleLife: 6
     };
     
@@ -33,8 +33,8 @@
         position(){
             this.x += this.velocityX;
             this.Y += this.velocityY;
-            this.x + this.velocityX > w && this.velocityX > 0 || this.x + this.velocityX > w && this.velocityX < 0? this.velocityX *= -1 : this.velocityX;
-            this.y + this.velocityY > h && this.velocityY > 0 || this.y + this.velocityY > h && this.velocityY < 0? this.velocityY *= -1 : this.velocityY;
+            this.x + this.velocityX > w && this.velocityX > 0 || this.x + this.velocityX < 0 && this.velocityX < 0? this.velocityX *= -1 : this.velocityX;
+            this.y + this.velocityY > h && this.velocityY > 0 || this.y + this.velocityY < 0 && this.velocityY < 0? this.velocityY *= -1 : this.velocityY;
         }
         reDraw(){
             context.beginPath();
@@ -42,16 +42,6 @@
             context.closePath();
             context.fillStyle = properties.particleColor;
             context.fill();
-        }
-        reCalculateLife(){
-            if(this.life < 1){
-                this.x = Math.random()*w;
-                this.y = Math.random()*h;
-                this.velocityX = Math.random()*(properties.particleMaxVelocity*2)-properties.particleMaxVelocity;
-                this.velocityy = Math.random()*(properties.particleMaxVelocity*2)-properties.particleMaxVelocity;
-                this.life = Math.random()*properties.particleLife*60;
-            }
-            this.life--;
         }
     }
 
@@ -72,7 +62,7 @@
                 if (length < properties.lineLen){
                     opacity = 1 - length/properties.lineLen;
                     context.lineWidth = '0,5';
-                    context.strokeStyle = 'rgba(229, 36, 255, '+opacity+')';
+                    context.strokeStyle = 'rgba(227, 0, 0, '+opacity+')';
                     context.beginPath();
                     context.moveTo(x1,y1);
                     context.lineTo(x2,y2);
@@ -85,7 +75,7 @@
 
     function reDrawParticles(){
         for(var i in particles){
-            particles[i].reCalculateLife();
+            //particles[i].reCalculateLife();
             particles[i].position();
             particles[i].reDraw();
         }
